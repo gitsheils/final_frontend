@@ -61,12 +61,12 @@ function Navigation({ isLoggedIn, handleClickAdd }) {
   }
   return (
     <nav className="nav">
-      <a className="nav__link" href="/">
+      <NavLink className="nav__link" to="/">
         Home
-      </a>
-      <a className="nav__link" href="/nutrition">
+      </NavLink>
+      <NavLink className="nav__link" to="/nutrition">
         Fruit nutrition
-      </a>
+      </NavLink>
     </nav>
   );
 }
