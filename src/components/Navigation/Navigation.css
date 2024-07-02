@@ -1,0 +1,47 @@
+.nav {
+  background-color: white;
+  margin: 30px 0 20px 0;
+  height: 30px;
+  display: flex;
+  column-gap: 30px;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+.nav__link {
+  font-family: arial;
+  font-size: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+.nav__link:visited {
+  color: black;
+}
+.nav__link_loggedin {
+  margin: 0;
+  position: absolute;
+  font-size: 18px;
+}
+.nav__link_loggedin_left {
+  right: 130px;
+}
+.nav__link_loggedin_right {
+  right: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    margin: 0 0 30px 10px;
+  }
+  .nav__link {
+    font-size: 20px;
+  }
+  .nav__link_loggedin {
+    position: static;
+  }
+}

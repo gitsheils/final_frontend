@@ -1,0 +1,27 @@
+.main {
+  background-color: white;
+  margin: 0;
+}
+
+.cards__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+@media screen and (max-width: 320px) {
+  .main {
+    margin: 0 0 0 10px;
+  }
+  .cards__list {
+    flex-wrap: nowrap;
+    overflow: scroll;
+  }
+  .card {
+    min-width: 300px;
+  }
+}
