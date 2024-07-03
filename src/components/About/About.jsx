@@ -1,7 +1,7 @@
 import "./About.css";
 function About() {
   return (
-    <div className="about">
+    <section className="about">
       <p className="about__bio">
         About the author of Recipe WebBook: I am an aspiring software engineer.
         I am familiar with HTML, CSS, JavaScript, React and Node.js, thanks to
@@ -9,7 +9,7 @@ function About() {
         restaurants so people can easily check out their menus. I would also
         like to build educational websites.
       </p>
-    </div>
+    </section>
   );
 }
 

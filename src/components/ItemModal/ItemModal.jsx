@@ -3,6 +3,11 @@ import "./ItemModal.css";
 function ItemModal({ isOpen, closeModal, card, handleClickDelete, user }) {
   let ingList = card.ing.split("\n");
 
+  let ingListWithID = [];
+  for (let i = 0; i < ingList.length; i++) {
+    ingListWithID.push({ ing: ingList[i], id: i + 1 });
+  }
+
   function handleDelete() {
     handleClickDelete(card);
   }
@@ -12,18 +17,25 @@ function ItemModal({ isOpen, closeModal, card, handleClickDelete, user }) {
       <div className="modal__content modal__content_item">
         <button className="modal__close" onClick={closeModal}></button>
         <div className="modal__recipe">
-          {card.image && <img className="modal__image" src={card.image}></img>}
+          {card.image && (
+            <img
+              className="modal__image"
+              src={card.image}
+              alt={`image of ${card.title}`}
+            ></img>
+          )}
           <h2 className="modal__title">{card.title}</h2>
-          <p className="modal__ing">
-            {ingList.map((ing) => {
+
+          <ul className="modal__ingredients">
+            {ingListWithID.map((item) => {
               return (
-                <>
-                  {ing}
+                <li className="modal__ingredients__item" key={item.id}>
+                  {item.ing}
                   <br />
-                </>
+                </li>
               );
             })}
-          </p>
+          </ul>
           <p className="modal__ins">{card.ins}</p>
           {user.email === card.owner && (
             <button className="modal__delete" onClick={handleDelete}>

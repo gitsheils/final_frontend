@@ -10,7 +10,7 @@
 }
 
 .nav__link {
-  font-family: arial;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 25px;
   cursor: pointer;
   text-decoration: none;
@@ -30,12 +30,16 @@
 .nav__link_loggedin_right {
   right: 0;
 }
-
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
   .nav {
+    justify-content: flex-start;
+  }
+}
+@media screen and (max-width: 620px) {
+  .nav {
+    height: auto;
     flex-direction: column;
     align-items: flex-start;
-    height: auto;
     margin: 0 0 30px 10px;
   }
   .nav__link {

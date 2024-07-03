@@ -15,7 +15,7 @@
   margin: 0;
 }
 */
-.header__button-signup {
+.header__button_signup {
   margin-left: auto;
   padding: 0;
   font-size: 20px;
@@ -23,18 +23,14 @@
   background-color: white;
   cursor: pointer;
 }
-.header__button-signup:hover {
-}
 
-.header__button-signin {
+.header__button_signin {
   margin-left: 30px;
   padding: 0;
   font-size: 20px;
   border: none;
   background-color: white;
   cursor: pointer;
-}
-.header__button-signup:hover {
 }
 
 .header__username {
@@ -44,7 +40,7 @@
   color: rgb(54, 53, 53);
 }
 
-.header__button-signout {
+.header__button_signout {
   margin-left: 30px;
   padding: 0;
   font-size: 20px;
@@ -53,12 +49,12 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 620px) {
   .header {
-    margin: 0 0 0 10px;
+    height: auto;
     flex-direction: column;
     align-items: flex-start;
-    height: auto;
+    margin: 0 0 0 10px;
   }
   .header__logo {
     margin-bottom: 20px;
@@ -67,6 +63,6 @@
     margin: 0;
   }
   .header__username {
-    margin: 0;
+    margin-left: 0;
   }
 }

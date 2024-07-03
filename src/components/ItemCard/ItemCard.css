@@ -21,18 +21,19 @@
 .card__title {
   margin: 0 10px;
 
-  overflow: scroll;
-
-  /*don't wrap/next line text then need to hide overflow:
+  /*don't wrap/next line text then need to hide overflow: */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  */
 }
-.card__ingredient {
+.card__ingredients {
   font-style: italic;
   margin: 20px 10px;
   border-top: solid 1px;
+
+  padding: 0;
+}
+.card__ingredients__item {
 }
 .card__instruction {
   margin: 40px 10px 10px;

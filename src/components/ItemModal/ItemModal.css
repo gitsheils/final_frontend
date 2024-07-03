@@ -10,9 +10,11 @@
   width: 300px;
 }
 
-.modal__ing {
+.modal__ingredients {
   margin: 20px 0 10px;
   font-style: italic;
+
+  padding: 0;
 }
 .modal__ins {
   margin: 0 0 20px;

@@ -7,8 +7,7 @@
   margin: 0 100px;
   font-family: Arial, Helvetica, sans-serif;
 }
-
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 620px) {
   .about {
     margin: 40px 0 0 10px;
   }

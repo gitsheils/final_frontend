@@ -43,35 +43,44 @@ import "./ItemCard.css";
 function ItemCard({ item, handleClickCard }) {
   let ingList = item.ing.split("\n");
 
+  let ingListWithID = [];
+  for (let i = 0; i < ingList.length; i++) {
+    ingListWithID.push({ ing: ingList[i], id: i + 1 });
+  }
+
   function handleClick() {
     handleClickCard(item);
   }
 
   if (item.image) {
     return (
-      <div className="card" onClick={handleClick}>
-        <img className="card__image" src={item.image}></img>
+      <li className="card" onClick={handleClick}>
+        <img
+          className="card__image"
+          src={item.image}
+          alt={`image of ${item.title}`}
+        ></img>
         <h2 className="card__title">{item.title}</h2>
-      </div>
+      </li>
     );
   }
   return (
-    <div className="card" onClick={handleClick}>
+    <li className="card" onClick={handleClick}>
       <h2 className="card__title">{item.title}</h2>
 
-      <p className="card__ingredient">
-        {ingList.map((ing) => {
+      <ul className="card__ingredients">
+        {ingListWithID.map((item) => {
           return (
-            <>
-              {ing}
+            <li className="card__ingredients__item" key={item.id}>
+              {item.ing}
               <br />
-            </>
+            </li>
           );
         })}
-      </p>
+      </ul>
 
       <p className="card__instruction">{item.ins}</p>
-    </div>
+    </li>
   );
 }
 export default ItemCard;

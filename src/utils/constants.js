@@ -24,7 +24,7 @@ export const recipesConstant = [
     owner: "joe2@gmail.com",
     shared: true,
     title: "shared panna cotta 3",
-    ing: "2 cups cream. 1/4 cup sugar",
+    ing: "2 cups cream\n1/4 cup sugar\nthird ing\nfourth",
     ins: "mix cream with sugar",
   },
   {
