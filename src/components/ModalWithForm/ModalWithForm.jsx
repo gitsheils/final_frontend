@@ -9,7 +9,6 @@ function ModalWithForm({
   handleSubmit,
   loginFailed,
 }) {
-  console.log(loginFailed);
   return (
     <div className={`modal ${isOpen === true && "modal_opened"}`}>
       <div className="modal__content">

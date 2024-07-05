@@ -9,7 +9,7 @@
 }
 @media screen and (max-width: 620px) {
   .about {
-    margin: 40px 0 0 10px;
+    margin: 40px 0 0;
   }
   .about__bio {
     margin: 0;

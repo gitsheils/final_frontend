@@ -13,9 +13,9 @@
   column-gap: 20px;
 }
 
-@media screen and (max-width: 620px) {
-  .main {
-    margin: 0 0 0 10px;
+@media screen and (max-width: 960px) {
+  .cards__list {
+    justify-content: center;
   }
 }
 
@@ -23,6 +23,7 @@
   .cards__list {
     flex-wrap: nowrap;
     overflow: scroll;
+    justify-content: flex-start;
   }
   .card {
     min-width: 300px;

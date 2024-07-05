@@ -10,15 +10,28 @@
   }
 }
 
+@media screen and (max-width: 960px) {
+  .page__content {
+    margin: 0 10px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .page__content {
     max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .page__content {
+    margin: 0 10px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .page__content {
-    margin: 0;
+    margin: 0 10px;
     max-width: 320px;
     overflow: hidden;
   }
