@@ -1,0 +1,18 @@
+.form__label_checkbox {
+  margin: 10px 0 0;
+}
+.form__input_checkbox {
+  margin: 0 5px 0 0;
+  width: 15px;
+  height: 15px;
+  vertical-align: baseline;
+}
+
+.form__input_ing {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100px;
+}
+.form__input_ins {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100px;
+}
