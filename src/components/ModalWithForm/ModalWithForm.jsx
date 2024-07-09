@@ -8,6 +8,7 @@ function ModalWithForm({
   children,
   handleSubmit,
   loginFailed,
+  signupFailed,
 }) {
   return (
     <div className={`modal ${isOpen === true && "modal_opened"}`}>
@@ -19,10 +20,17 @@ function ModalWithForm({
 
           <span
             className={`modal__error ${
-              loginFailed == true && "modal__error_active"
+              loginFailed && "modal__error_active-signin"
             }`}
           >
             Invalid email or password
+          </span>
+          <span
+            className={`modal__error ${
+              signupFailed && "modal__error_active-signup"
+            }`}
+          >
+            Account with this email already exists
           </span>
           <button className="modal__submit" type="submit">
             {buttonLabel}

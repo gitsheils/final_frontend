@@ -19,96 +19,174 @@ import About from "../About/About.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Preloader from "../Preloader/Preloader.jsx";
 
-function App() {
-  const [count, setCount] = useState(0);
+import { setToken, getToken, removeToken } from "../../utils/token.js";
+import {
+  getSharedRecipes,
+  signin,
+  getUserInfo,
+  signup,
+  addRecipe,
+  getMyRecipes,
+  deleteRecipe,
+} from "../../utils/api.js";
 
+function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [recipes, setRecipes] = useState(recipesConstant);
-
   const [modalType, setModalType] = useState("");
-
-  const [users, setUsers] = useState(usersConstant);
   const [user, setUser] = useState("");
 
+  const [sharedRecipes, setSharedRecipes] = useState([]);
+  const [myRecipes, setMyRecipes] = useState([]);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [loginFailed, setLoginFailed] = useState(false);
+  const [signupFailed, setSignupFailed] = useState(false);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getSharedRecipes()
+      .then((shared) => {
+        const reversed = shared.reverse();
+        setSharedRecipes(reversed);
+      })
+      .catch(console.error);
+
+    const token = getToken();
+    if (!token) {
+      return;
+    }
+    getUserInfo(token)
+      .then((user) => {
+        setUser(user);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
+
+    getMyRecipes(token)
+      .then((myr) => {
+        const reversed = myr.reverse();
+        setMyRecipes(reversed);
+      })
+      .catch(console.error);
+  }, []);
 
   function closeModal() {
     setIsOpen(false);
     setLoginFailed(false);
+    setSignupFailed(false);
   }
 
-  function handleClickSignin() {
-    setIsOpen(true);
-    setModalType("signin");
-  }
   function handleClickSignup() {
     setIsOpen(true);
     setModalType("signup");
   }
-
-  const currentUser = (email, password) => {
-    return users.find((user) => {
-      return user.email === email && user.password === password;
-    });
-  };
-  const [loginFailed, setLoginFailed] = useState(false);
-  function handleSubmitSignin({ email, password }) {
-    const user = currentUser(email, password);
-    if (user) {
-      setIsLoggedIn(true);
-      setUser(user);
-      closeModal();
-      navigate("/myrecipes");
-      return;
-    }
-
-    setLoginFailed(true);
-
-    return console.log("user not found");
+  function handleClickSignin() {
+    setIsOpen(true);
+    setModalType("signin");
   }
-  function handleSubmitSignup({ email, password }) {
-    setUsers([...users, { email, password }]);
-    setIsLoggedIn(true);
-    setUser({ email, password });
-    closeModal();
-  }
-
-  //
   function handleClickAdd() {
     setIsOpen(true);
     setModalType("recipe");
   }
-
-  function handleSubmitAdd({ title, ing, ins, shared }) {
-    setRecipes([
-      ...recipes,
-      { id: recipes.length + 1, owner: user.email, shared, title, ing, ins },
-    ]);
-    closeModal();
+  function handleClickSignout() {
+    setIsLoggedIn(false);
+    setUser("");
+    removeToken();
+    navigate("/");
   }
-
-  const [selectedCard, setSelectedCard] = useState({});
   const handleClickCard = (card) => {
     setIsOpen(true);
     setModalType("card");
     setSelectedCard(card);
   };
-  const handleClickDelete = (card) => {
-    closeModal();
-    const updatedRecipes = [...recipes];
 
-    updatedRecipes.forEach((item, index) => {
-      if (item.id === card.id) {
-        updatedRecipes.splice(index, 1);
-      }
-    });
-    setRecipes(updatedRecipes);
+  const handleClickDelete = (card) => {
+    const token = getToken();
+    deleteRecipe(token, card._id)
+      .then((res) => {
+        if (res.shared) {
+          setSharedRecipes(
+            sharedRecipes.filter((item) => {
+              return item._id !== res._id;
+            })
+          );
+          setMyRecipes(
+            myRecipes.filter((item) => {
+              return item._id !== res._id;
+            })
+          );
+          closeModal();
+        } else {
+          setMyRecipes(
+            myRecipes.filter((item) => {
+              return item._id !== res._id;
+            })
+          );
+          closeModal();
+        }
+      })
+      .catch(console.error);
   };
-  function handleClickSignout() {
-    setIsLoggedIn(false);
-    setUser("");
-    navigate("/");
+
+  function handleSubmitSignup({ email, password }) {
+    signup(email, password)
+      .then((user) => {
+        handleSubmitSignin({ email, password });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err === "Error 409") {
+          setSignupFailed(true);
+        }
+      });
+  }
+
+  function handleSubmitSignin({ email, password }) {
+    signin(email, password)
+      .then((res) => {
+        setToken(res.token);
+        const token = getToken();
+        getUserInfo(token)
+          .then((user) => {
+            setUser(user);
+            setIsLoggedIn(true);
+            closeModal();
+
+            navigate("/myrecipes");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        getMyRecipes(token)
+          .then((myr) => {
+            const reversed = myr.reverse();
+            setMyRecipes(reversed);
+          })
+          .catch(console.error);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err === "Error 401") {
+          setLoginFailed(true);
+        }
+      });
+  }
+
+  function handleSubmitAdd({ title, ing, ins, shared, image }) {
+    const token = getToken();
+    addRecipe(token, title, ing, ins, shared, image)
+      .then((res) => {
+        if (res.shared) {
+          setSharedRecipes([res, ...sharedRecipes]);
+          setMyRecipes([res, ...myRecipes]);
+        } else {
+          setMyRecipes([res, ...myRecipes]);
+        }
+        closeModal();
+      })
+      .catch(console.error);
   }
 
   return (
@@ -124,21 +202,23 @@ function App() {
 
       <Routes>
         <Route path="*" element={<Preloader />}></Route>
+
         <Route
           path="/"
           element={
             <Main
-              recipes={recipes}
-              user={user}
+              recipes={sharedRecipes}
               handleClickCard={handleClickCard}
+              sharedRecipes={sharedRecipes}
             />
           }
         />
+
         <Route
           path="/myrecipes"
           element={
             <Profile
-              recipes={recipes}
+              recipes={myRecipes}
               isLoggedIn={isLoggedIn}
               user={user}
               handleClickCard={handleClickCard}
@@ -160,6 +240,7 @@ function App() {
           isOpen={isOpen}
           closeModal={closeModal}
           handleSubmitSignup={handleSubmitSignup}
+          signupFailed={signupFailed}
         ></SignupModal>
       )}
       {modalType === "recipe" && (
@@ -177,6 +258,14 @@ function App() {
           handleClickDelete={handleClickDelete}
           user={user}
         ></ItemModal>
+      )}
+
+      {modalType === "add2" && (
+        <AddPhoto
+          isOpen={isOpen}
+          closeModal={closeModal}
+          handleClickAdd2={handleClickAdd2}
+        ></AddPhoto>
       )}
 
       <About />

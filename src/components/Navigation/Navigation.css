@@ -19,6 +19,9 @@
 .nav__link:visited {
   color: black;
 }
+.nav__link:hover {
+  color: grey;
+}
 .nav__link_loggedin {
   margin: 0;
   position: absolute;

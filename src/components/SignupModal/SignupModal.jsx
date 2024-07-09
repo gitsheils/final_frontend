@@ -2,7 +2,7 @@ import "./SignupModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import { useState, useEffect } from "react";
 
-function SignupModal({ isOpen, closeModal, handleSubmitSignup }) {
+function SignupModal({ isOpen, closeModal, handleSubmitSignup, signupFailed }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,6 +31,7 @@ function SignupModal({ isOpen, closeModal, handleSubmitSignup }) {
       title="Sign Up"
       buttonLabel="sign up"
       handleSubmit={handleSubmit}
+      signupFailed={signupFailed}
     >
       <label className="form__label" htmlFor="email">
         Email
@@ -54,8 +55,6 @@ function SignupModal({ isOpen, closeModal, handleSubmitSignup }) {
           onChange={handlePassword}
           value={password}
           required
-          minLength={2}
-          maxLength={30}
         />
         <span className="form__input-error"></span>
       </label>

@@ -31,9 +31,10 @@
   margin: 20px 10px;
   border-top: solid 1px;
 
-  padding: 0;
+  padding: 0px;
 }
 .card__ingredients__item {
+  list-style-type: none;
 }
 .card__instruction {
   margin: 40px 10px 10px;

@@ -6,7 +6,7 @@
 }
 
 .form_nutrition {
-  width: 350px;
+  max-width: 350px;
   height: 60px;
 }
 .form__label_nutrition {
@@ -61,9 +61,17 @@
   }
 }
 
+@media screen and (max-width: 620px) {
+  .nutrition {
+    flex-direction: column;
+  }
+  .nutrition__info {
+    margin-left: 0px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .nutrition {
-    margin: 0 0 0 10px;
     flex-wrap: wrap;
   }
 }

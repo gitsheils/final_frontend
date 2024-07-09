@@ -79,7 +79,11 @@
   color: red;
   display: none;
 }
-.modal__error_active {
+
+.modal__error_active-signin {
+  display: block;
+}
+.modal__error_active-signup {
   display: block;
 }
 

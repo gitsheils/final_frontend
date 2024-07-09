@@ -15,6 +15,9 @@
   margin: 0;
 }
 */
+.header__button:hover {
+  color: grey;
+}
 .header__button_signup {
   margin-left: auto;
   padding: 0;
@@ -61,6 +64,7 @@
   .header__button {
     margin: 0;
   }
+
   .header__username {
     margin-left: 0;
   }

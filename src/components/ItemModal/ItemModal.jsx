@@ -1,7 +1,7 @@
 import "./ItemModal.css";
 
 function ItemModal({ isOpen, closeModal, card, handleClickDelete, user }) {
-  let ingList = card.ing.split("\n");
+  let ingList = card.ingredients.split("\n");
 
   let ingListWithID = [];
   for (let i = 0; i < ingList.length; i++) {
@@ -36,8 +36,8 @@ function ItemModal({ isOpen, closeModal, card, handleClickDelete, user }) {
               );
             })}
           </ul>
-          <p className="modal__ins">{card.ins}</p>
-          {user.email === card.owner && (
+          <p className="modal__ins">{card.instruction}</p>
+          {user._id === card.owner && (
             <button className="modal__delete" onClick={handleDelete}>
               delete recipe
             </button>

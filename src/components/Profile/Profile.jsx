@@ -1,5 +1,6 @@
 import "./Profile.css";
 import ItemCard from "../ItemCard/ItemCard";
+import { Navigate } from "react-router-dom";
 
 function Profile({ recipes, isLoggedIn, user, handleClickCard }) {
   if (isLoggedIn) {
@@ -7,24 +8,21 @@ function Profile({ recipes, isLoggedIn, user, handleClickCard }) {
       <div className="profile">
         <section className="cards">
           <ul className="cards__list">
-            {recipes
-              .filter((item) => {
-                return item.owner === user.email;
-              })
-              .map((item) => {
-                return (
-                  <ItemCard
-                    key={item.id}
-                    item={item}
-                    handleClickCard={handleClickCard}
-                  />
-                );
-              })}
+            {recipes.map((item) => {
+              return (
+                <ItemCard
+                  key={item._id}
+                  item={item}
+                  handleClickCard={handleClickCard}
+                />
+              );
+            })}
           </ul>
         </section>
       </div>
     );
   }
-  return <></>;
+  return <Navigate to={"/"} />;
 }
+
 export default Profile;
