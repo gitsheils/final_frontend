@@ -20,16 +20,14 @@ import Footer from "../Footer/Footer.jsx";
 import Preloader from "../Preloader/Preloader.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [recipes, setRecipes] = useState(recipesConstant);
-
   const [modalType, setModalType] = useState("");
-
-  const [users, setUsers] = useState(usersConstant);
   const [user, setUser] = useState("");
+  const [recipes, setRecipes] = useState(recipesConstant);
+  const [users, setUsers] = useState(usersConstant);
+
+  const [selectedCard, setSelectedCard] = useState({});
 
   const navigate = useNavigate();
 
@@ -38,57 +36,23 @@ function App() {
     setLoginFailed(false);
   }
 
-  function handleClickSignin() {
-    setIsOpen(true);
-    setModalType("signin");
-  }
   function handleClickSignup() {
     setIsOpen(true);
     setModalType("signup");
   }
-
-  const currentUser = (email, password) => {
-    return users.find((user) => {
-      return user.email === email && user.password === password;
-    });
-  };
-  const [loginFailed, setLoginFailed] = useState(false);
-  function handleSubmitSignin({ email, password }) {
-    const user = currentUser(email, password);
-    if (user) {
-      setIsLoggedIn(true);
-      setUser(user);
-      closeModal();
-      navigate("/myrecipes");
-      return;
-    }
-
-    setLoginFailed(true);
-
-    return console.log("user not found");
+  function handleClickSignin() {
+    setIsOpen(true);
+    setModalType("signin");
   }
-  function handleSubmitSignup({ email, password }) {
-    setUsers([...users, { email, password }]);
-    setIsLoggedIn(true);
-    setUser({ email, password });
-    closeModal();
-  }
-
-  //
   function handleClickAdd() {
     setIsOpen(true);
     setModalType("recipe");
   }
-
-  function handleSubmitAdd({ title, ing, ins, shared }) {
-    setRecipes([
-      ...recipes,
-      { id: recipes.length + 1, owner: user.email, shared, title, ing, ins },
-    ]);
-    closeModal();
+  function handleClickSignout() {
+    setIsLoggedIn(false);
+    setUser("");
+    navigate("/");
   }
-
-  const [selectedCard, setSelectedCard] = useState({});
   const handleClickCard = (card) => {
     setIsOpen(true);
     setModalType("card");
@@ -105,10 +69,41 @@ function App() {
     });
     setRecipes(updatedRecipes);
   };
-  function handleClickSignout() {
-    setIsLoggedIn(false);
-    setUser("");
-    navigate("/");
+
+  const currentUser = (email, password) => {
+    return users.find((user) => {
+      return user.email === email && user.password === password;
+    });
+  };
+
+  function handleSubmitSignup({ email, password }) {
+    setUsers([...users, { email, password }]);
+    setIsLoggedIn(true);
+    setUser({ email, password });
+    closeModal();
+  }
+  const [loginFailed, setLoginFailed] = useState(false);
+  function handleSubmitSignin({ email, password }) {
+    const user = currentUser(email, password);
+    if (user) {
+      setIsLoggedIn(true);
+      setUser(user);
+      closeModal();
+      navigate("/myrecipes");
+      return;
+    }
+
+    setLoginFailed(true);
+
+    return console.log("user not found");
+  }
+
+  function handleSubmitAdd({ title, ing, ins, shared }) {
+    setRecipes([
+      { id: recipes.length + 1, owner: user.email, shared, title, ing, ins },
+      ...recipes,
+    ]);
+    closeModal();
   }
 
   return (

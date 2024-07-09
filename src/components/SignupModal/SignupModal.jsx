@@ -54,8 +54,6 @@ function SignupModal({ isOpen, closeModal, handleSubmitSignup }) {
           onChange={handlePassword}
           value={password}
           required
-          minLength={2}
-          maxLength={30}
         />
         <span className="form__input-error"></span>
       </label>

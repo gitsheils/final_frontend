@@ -7,6 +7,7 @@ function AddRecipeModal({ isOpen, closeModal, handleSubmitAdd }) {
   const [ing, setIng] = useState("");
   const [ins, setIns] = useState("");
   const [shared, setShared] = useState(false);
+  const [image, setImage] = useState("");
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -20,12 +21,16 @@ function AddRecipeModal({ isOpen, closeModal, handleSubmitAdd }) {
   const handleShare = (e) => {
     setShared(e.target.checked);
   };
+  const handleImage = (e) => {
+    setImage(e.target.value);
+  };
 
   useEffect(() => {
     setTitle("");
     setIng("");
     setIns("");
     setShared(false);
+    setImage("");
   }, [isOpen]);
 
   function handleSubmit(e) {
@@ -53,7 +58,6 @@ function AddRecipeModal({ isOpen, closeModal, handleSubmitAdd }) {
           required
         />
       </label>
-
       <label className="form__label" htmlFor="ing">
         Ingredients
         <textarea
@@ -78,6 +82,17 @@ function AddRecipeModal({ isOpen, closeModal, handleSubmitAdd }) {
           value={ins}
           required
         ></textarea>
+      </label>
+      <label className="form__label" htmlFor="image">
+        Image Url
+        <input
+          className="form__input"
+          type="url"
+          placeholder="url"
+          id="image"
+          onChange={handleImage}
+          value={image}
+        />
       </label>
       <label className="form__label_checkbox" htmlFor="shared">
         <input
