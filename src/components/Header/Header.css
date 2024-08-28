@@ -1,0 +1,70 @@
+.header {
+  display: flex;
+  background-color: white;
+  align-items: flex-end;
+  height: 70px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header__logo {
+  width: 300px;
+}
+/*
+.header__title {
+  font-family: WildCrazy;
+  margin: 0;
+}
+*/
+.header__button:hover {
+  color: gray;
+}
+.header__button_signup {
+  margin-left: auto;
+  padding: 0;
+  font-size: 20px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.header__button_signin {
+  margin-left: 30px;
+  padding: 0;
+  font-size: 20px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.header__username {
+  margin: 0 0 0 auto;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(54, 53, 53);
+}
+
+.header__button_signout {
+  margin-left: 30px;
+  padding: 0;
+  font-size: 20px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 620px) {
+  .header {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header__logo {
+    margin-bottom: 20px;
+  }
+  .header__button {
+    margin: 0;
+  }
+  .header__username {
+    margin-left: 0;
+  }
+}

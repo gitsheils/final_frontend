@@ -1,0 +1,17 @@
+.about {
+  margin: 200px 0 50px;
+  background-color: white;
+}
+.about__bio {
+  background-color: white;
+  margin: 0 100px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 620px) {
+  .about {
+    margin: 40px 0 0;
+  }
+  .about__bio {
+    margin: 0;
+  }
+}

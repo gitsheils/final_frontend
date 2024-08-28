@@ -1,8 +1,3 @@
-# React + Vite
+Using HTML, CSS and React, this app allows visitors to create an account in order to log their recipes and search up nutrition info about food (powered by CalorieNinjas API). Account users can share their recipes for visitors without an account to view the shared recipes. This app was also developed using Vite to easily set up the app. This app was deployed using Github Pages (https://gitsheils.github.io/final_frontend/). A demo of this project is available (https://drive.google.com/file/d/1M1585XoDiUNX4i1FvsI7NWmwcDsgqUuM/view?usp=sharing).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Future improvements to this app may include an edit feature for users to edit their recipe. Another improvement could include a like feature and review feature for the shared recipes, so that account users can see what others think about their recipes and visitors can see which recipes are rated well.
